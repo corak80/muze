@@ -1,27 +1,20 @@
 (function(){
   "use strict";
 
-  /* ---- waveform builders ---- */
-  function buildWave(el,count){
+  /* ---- static waveform marks (a quiet logo nod, no motion) ---- */
+  function buildWave(el,count,min,max){
     if(!el) return;
     var html="";
     for(var i=0;i<count;i++){
-      var dur=(1.0+Math.random()*1.1).toFixed(2);
-      var del=(Math.random()*-2).toFixed(2);
-      html+='<i style="animation-duration:'+dur+'s;animation-delay:'+del+'s"></i>';
+      // smooth, deterministic profile so it reads as a calm waveform
+      var t=i/(count-1);
+      var h=min+(max-min)*(0.5+0.5*Math.sin(t*Math.PI*6)*Math.sin(t*Math.PI+0.6));
+      html+='<i style="height:'+h.toFixed(1)+'%"></i>';
     }
     el.innerHTML=html;
   }
-  buildWave(document.getElementById('heroWave'),64);
-  (function(){var f=document.getElementById('footWave');if(f){for(var i=0;i<7;i++){var b=document.createElement('i');b.style.height=(20+Math.random()*80)+'%';b.style.animationDelay=(i*0.12)+'s';f.appendChild(b);}}})();
-
-  /* ---- marquee: duplicate server-rendered items for a seamless loop ---- */
-  var track=document.getElementById('marquee');
-  if(track && track.children.length){
-    track.innerHTML=track.innerHTML+track.innerHTML;
-  }
-
-  /* ---- persist language choice is via separate files; nothing to do here ---- */
+  buildWave(document.getElementById('heroWave'),52,16,96);
+  buildWave(document.getElementById('footWave'),7,28,100);
 
   /* ---- nav scroll state ---- */
   var nav=document.getElementById('nav');
@@ -39,28 +32,17 @@
     root.setAttribute('data-mode', root.getAttribute('data-mode')==='night' ? 'day':'night');
   });
 
-  /* ---- reveal on scroll ---- */
+  /* ---- gentle fade-in on scroll (opacity only) ---- */
   var io=new IntersectionObserver(function(es){
     es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
-  },{threshold:0.12,rootMargin:'0px 0px -8% 0px'});
+  },{threshold:0.1,rootMargin:'0px 0px -6% 0px'});
   document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
 
-  /* ---- count up ---- */
-  var counted=new WeakSet();
-  var cio=new IntersectionObserver(function(es){
-    es.forEach(function(e){
-      if(!e.isIntersecting||counted.has(e.target))return;
-      counted.add(e.target);
-      var el=e.target, target=+el.getAttribute('data-count'), suffix=el.querySelector('small');
-      var sfx=suffix?suffix.outerHTML:'', start=performance.now(), dur=1400;
-      (function tick(now){
-        var p=Math.min((now-start)/dur,1), ease=1-Math.pow(1-p,3);
-        el.innerHTML=Math.round(target*ease)+sfx;
-        if(p<1)requestAnimationFrame(tick);
-      })(start);
-    });
-  },{threshold:0.5});
-  document.querySelectorAll('[data-count]').forEach(function(el){cio.observe(el);});
+  /* ---- stats: render final numbers (no count-up animation) ---- */
+  document.querySelectorAll('[data-count]').forEach(function(el){
+    var suffix=el.querySelector('small');
+    el.innerHTML=el.getAttribute('data-count')+(suffix?suffix.outerHTML:'');
+  });
 
   /* ---- layout switcher ---- */
   var opts=document.querySelectorAll('.lay-opt'), plans=document.querySelectorAll('#layPlan img');
@@ -88,12 +70,5 @@
     var open=document.querySelector('.acc-item.open .acc-body');
     if(open) open.style.maxHeight=open.scrollHeight+'px';
   });
-
-  /* ---- hero parallax ---- */
-  var hp=document.getElementById('heroPhoto');
-  window.addEventListener('scroll',function(){
-    var y=window.scrollY;
-    if(y<window.innerHeight) hp.style.transform='scale(1.06) translateY('+(y*0.18)+'px)';
-  },{passive:true});
 
 })();
