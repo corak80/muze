@@ -1,21 +1,6 @@
 (function(){
   "use strict";
 
-  /* ---- static waveform marks (a quiet logo nod, no motion) ---- */
-  function buildWave(el,count,min,max){
-    if(!el) return;
-    var html="";
-    for(var i=0;i<count;i++){
-      // smooth, deterministic profile so it reads as a calm waveform
-      var t=i/(count-1);
-      var h=min+(max-min)*(0.5+0.5*Math.sin(t*Math.PI*6)*Math.sin(t*Math.PI+0.6));
-      html+='<i style="height:'+h.toFixed(1)+'%"></i>';
-    }
-    el.innerHTML=html;
-  }
-  buildWave(document.getElementById('heroWave'),52,16,96);
-  buildWave(document.getElementById('footWave'),7,28,100);
-
   /* ---- nav scroll state ---- */
   var nav=document.getElementById('nav');
   var onScroll=function(){ nav.classList.toggle('scrolled',window.scrollY>40); };

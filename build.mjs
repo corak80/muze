@@ -34,7 +34,8 @@ en:{
   code:'en', label:'EN', dir:'ltr',
   title:'MUZE — A versatile event space in the heart of Vaasa',
   desc:'MUZE is a 165 m² event space at Funkkis in Vaasa. Bright and airy by day, a glowing club by night — for weddings, parties, seminars and every special moment. Up to 150 guests.',
-  nav:{space:'The Space',layouts:'Layouts',gallery:'Gallery',pricing:'Pricing',rentals:'Rentals',contact:'Contact',book:'Book the room',night:'Night',day:'Day'},
+  nav:{space:'The Space',layouts:'Layouts',gallery:'Gallery',info:'Details',pricing:'Pricing',rentals:'Rentals',contact:'Contact',book:'Book the room',night:'Night',day:'Day'},
+  info:{heading:'Good to know',snum:'/ practical details',fees:'Rental fees',included:'What’s included',hire:'Equipment for hire',rules:'House rules'},
   hero:{eyebrow:'Vaasa · Funkkis · Sepänkyläntie 2',
     tagline:'A versatile event space in the heart of Vaasa — a beautiful venue for all your special moments.',
     meta:'165 m² · up to 150 guests · one unforgettable room',
@@ -136,7 +137,8 @@ fi:{
   code:'fi', label:'FI', dir:'ltr',
   title:'MUZE — Monipuolinen juhla- ja tapahtumatila Vaasan sydämessä',
   desc:'MUZE on 165 m² tapahtumatila Funkkiksella Vaasassa. Päivällä valoisa ja avara, illalla hehkuva juhlatila — häihin, juhliin, seminaareihin ja kaikkiin tärkeisiin hetkiin. Jopa 150 vierasta.',
-  nav:{space:'Tila',layouts:'Pohjat',gallery:'Galleria',pricing:'Hinnasto',rentals:'Vuokraus',contact:'Yhteystiedot',book:'Varaa tila',night:'Ilta',day:'Päivä'},
+  nav:{space:'Tila',layouts:'Pohjat',gallery:'Galleria',info:'Tiedot',pricing:'Hinnasto',rentals:'Vuokraus',contact:'Yhteystiedot',book:'Varaa tila',night:'Ilta',day:'Päivä'},
+  info:{heading:'Hyvä tietää',snum:'/ käytännön tiedot',fees:'Vuokrahinnat',included:'Mitä tila sisältää',hire:'Vuokrakalusto',rules:'Vuokrausehdot'},
   hero:{eyebrow:'Vaasa · Funkkis · Sepänkyläntie 2',
     tagline:'Monipuolinen juhla- ja tapahtumatila Vaasan sydämessä — kaunis paikka kaikille elämäsi tärkeille hetkille.',
     meta:'165 m² · jopa 150 vierasta · yksi unohtumaton tila',
@@ -238,7 +240,8 @@ sv:{
   code:'sv', label:'SV', dir:'ltr',
   title:'MUZE — En mångsidig evenemangslokal mitt i Vasa',
   desc:'MUZE är en 165 m² evenemangslokal på Funkkis i Vasa. Ljus och luftig om dagen, en glödande festlokal om kvällen — för bröllop, fester, seminarier och alla viktiga stunder. Upp till 150 gäster.',
-  nav:{space:'Lokalen',layouts:'Planlösningar',gallery:'Galleri',pricing:'Priser',rentals:'Uthyrning',contact:'Kontakt',book:'Boka lokalen',night:'Kväll',day:'Dag'},
+  nav:{space:'Lokalen',layouts:'Planlösningar',gallery:'Galleri',info:'Detaljer',pricing:'Priser',rentals:'Uthyrning',contact:'Kontakt',book:'Boka lokalen',night:'Kväll',day:'Dag'},
+  info:{heading:'Bra att veta',snum:'/ praktisk info',fees:'Hyrespriser',included:'Vad som ingår',hire:'Utrustning att hyra',rules:'Uthyrningsvillkor'},
   hero:{eyebrow:'Vasa · Funkkis · Sepänkyläntie 2',
     tagline:'En mångsidig fest- och evenemangslokal mitt i Vasa — en vacker plats för livets alla viktiga stunder.',
     meta:'165 m² · upp till 150 gäster · ett oförglömligt rum',
@@ -344,9 +347,10 @@ function langSwitch(cur){
   return order.map(l=>`<a href="./${FILES[l]}" class="lang-opt${l===cur?' active':''}" hreflang="${l}">${D[l].label}</a>`).join('');
 }
 function navLinks(t){
-  return ['space','layouts','gallery','pricing','rentals','contact']
+  return ['space','layouts','gallery','info','contact']
     .map(k=>`<a href="#${k}">${t.nav[k]}</a>`).join('\n      ');
 }
+const LOGO = './assets/Muze-Logo-NEW_WHITE-scaled.webp';
 function priceCard(card,feature=false){
   const rows=card.rows.map(r=>`<div class="prow"><div class="pd">${r.d}${r.s?`<small>${r.s}</small>`:''}</div><div class="pp">${r.p}</div></div>`).join('');
   return `<div class="pcard${feature?' feature':''} reveal">
@@ -383,19 +387,14 @@ ${alts}
 <link rel="icon" href="./assets/cropped-Muze-Logo_profile-scaled-1.webp" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..600&family=Archivo:wght@300..800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="./site.css" />
 </head>
 <body>
 
-<div class="aura" aria-hidden="true"><span class="a1"></span><span class="a2"></span><span class="a3"></span></div>
-
 <nav class="nav" id="nav">
   <div class="nav-inner">
-    <a href="#top" class="brand">
-      <span class="mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span>
-      MUZE
-    </a>
+    <a href="#top" class="brand" aria-label="MUZE — home"><img class="logo-img" src="${LOGO}" alt="MUZE" /></a>
     <div class="nav-links">
       ${navLinks(t)}
     </div>
@@ -416,8 +415,7 @@ ${alts}
   <a href="#space">${t.nav.space}</a>
   <a href="#layouts">${t.nav.layouts}</a>
   <a href="#gallery">${t.nav.gallery}</a>
-  <a href="#pricing">${t.nav.pricing}</a>
-  <a href="#rentals">${t.nav.rentals}</a>
+  <a href="#info">${t.nav.info}</a>
   <a href="#contact">${t.nav.contact} <em>info@muze.fi</em></a>
 </div>
 
@@ -425,8 +423,7 @@ ${alts}
   <div class="hero-bg"><div class="photo" id="heroPhoto"></div></div>
   <div class="wrap">
     <div class="hero-eyebrow"><span class="ln"></span><span class="eyebrow">${t.hero.eyebrow}</span></div>
-    <h1 class="display"><span class="ch">M</span><span class="ch">U</span><span class="ch">Z</span><span class="ch">E</span></h1>
-    <div class="wave" id="heroWave" aria-hidden="true"></div>
+    <h1 class="hero-logo"><img src="${LOGO}" alt="MUZE" /></h1>
     <div class="hero-bottom">
       <p class="hero-tag">${t.hero.tagline}</p>
       <div class="hero-cta">
@@ -471,15 +468,6 @@ ${alts}
   </div>
 </section>
 
-<section class="section" id="features">
-  <div class="wrap">
-    <div class="shead"><h2 class="display reveal">${t.feat.title}</h2><span class="snum reveal d1">${t.feat.snum}</span></div>
-    <div class="feat-grid">
-      ${t.feat.items.map((f,i)=>`<div class="feat reveal${i%3?` d${i%3}`:''}"><span class="fi">${String(i+1).padStart(2,'0')}</span><div><h4 class="display">${f.h}</h4><p>${f.p}</p></div></div>`).join('\n      ')}
-    </div>
-  </div>
-</section>
-
 <section class="section layouts" id="layouts">
   <div class="wrap">
     <div class="shead"><h2 class="display reveal">${t.lay.title}</h2><span class="snum reveal d1">${t.lay.snum}</span></div>
@@ -514,44 +502,49 @@ ${alts}
   </div>
 </section>
 
-<section class="section layouts" id="pricing">
+<section class="section" id="info">
   <div class="wrap">
-    <div class="shead"><h2 class="display reveal">${t.price.title}</h2><span class="snum reveal d1">${t.price.snum}</span></div>
-    <p class="lay-note reveal" style="margin:-30px 0 30px">${t.price.disclaimer} &nbsp;·&nbsp; ${t.price.spaceNote}</p>
-    <div class="price-grid">
-      ${priceCard(t.price.wd)}
-      ${priceCard(t.price.we)}
-      ${priceCard(t.price.long,true)}
-    </div>
-    <div class="addons">
-      ${addon(t.price.sl)}
-      ${addon(t.price.ent)}
-      ${addon(t.price.din)}
-    </div>
-    <p class="lay-note" style="margin-top:26px">${t.price.foot}</p>
-  </div>
-</section>
-
-<section class="section" id="rentals">
-  <div class="wrap">
-    <div class="shead"><h2 class="display reveal">${t.rent.title}</h2><span class="snum reveal d1">${t.rent.snum}</span></div>
-    <p class="lead reveal" style="margin-bottom:30px">${t.rent.intro}</p>
+    <div class="shead"><h2 class="display reveal">${t.info.heading}</h2><span class="snum reveal d1">${t.info.snum}</span></div>
     <div class="acc reveal" id="acc">
-      ${t.rent.groups.map((g,i)=>`<div class="acc-item${i===0?' open':''}">
-        <button class="acc-head">${g.head} <span class="plus">+</span></button>
-        <div class="acc-body"><div class="acc-inner">${g.note?`<p class="lay-note" style="margin:0 0 14px">${g.note}</p>`:''}<div class="acc-grid">
-          ${g.rows.map(r=>`<div class="arow${r.full?' full':''}"><span>${r.d}</span><b>${r.p}</b></div>`).join('\n          ')}
-        </div></div></div>
-      </div>`).join('\n      ')}
-    </div>
-  </div>
-</section>
 
-<section class="section rules" id="rules">
-  <div class="wrap">
-    <div class="shead"><h2 class="display reveal">${t.rules.title}</h2><span class="snum reveal d1">${t.rules.snum}</span></div>
-    <div class="rule-grid">
-      ${t.rules.items.map((r,i)=>`<div class="rule reveal${i%2?' d1':''}"><span class="rn display">${['①','②','③','④','⑤','⑥','⑦','⑧','⑨'][i]}</span><p>${r}</p></div>`).join('\n      ')}
+      <div class="acc-item open">
+        <button class="acc-head">${t.info.fees} <span class="plus">+</span></button>
+        <div class="acc-body"><div class="acc-inner">
+          <p class="lay-note" style="margin:0 0 26px">${t.price.disclaimer} &nbsp;·&nbsp; ${t.price.spaceNote}</p>
+          <div class="price-grid">${priceCard(t.price.wd)}${priceCard(t.price.we)}${priceCard(t.price.long,true)}</div>
+          <div class="addons">${addon(t.price.sl)}${addon(t.price.ent)}${addon(t.price.din)}</div>
+          <p class="lay-note" style="margin-top:24px">${t.price.foot}</p>
+        </div></div>
+      </div>
+
+      <div class="acc-item">
+        <button class="acc-head">${t.info.included} <span class="plus">+</span></button>
+        <div class="acc-body"><div class="acc-inner">
+          <div class="feat-grid">
+          ${t.feat.items.map((f,i)=>`<div class="feat"><span class="fi">${String(i+1).padStart(2,'0')}</span><div><h4 class="display">${f.h}</h4><p>${f.p}</p></div></div>`).join('\n          ')}
+          </div>
+        </div></div>
+      </div>
+
+      <div class="acc-item">
+        <button class="acc-head">${t.info.hire} <span class="plus">+</span></button>
+        <div class="acc-body"><div class="acc-inner">
+          <p class="lead" style="margin-bottom:26px">${t.rent.intro}</p>
+          ${t.rent.groups.map(g=>`<div class="rgroup"><h5 class="rgroup-h">${g.head}</h5>${g.note?`<p class="lay-note" style="margin:0 0 12px">${g.note}</p>`:''}<div class="acc-grid">
+            ${g.rows.map(r=>`<div class="arow${r.full?' full':''}"><span>${r.d}</span><b>${r.p}</b></div>`).join('\n            ')}
+          </div></div>`).join('\n          ')}
+        </div></div>
+      </div>
+
+      <div class="acc-item">
+        <button class="acc-head">${t.info.rules} <span class="plus">+</span></button>
+        <div class="acc-body"><div class="acc-inner">
+          <div class="rule-grid">
+          ${t.rules.items.map((r,i)=>`<div class="rule"><span class="rn display">${['①','②','③','④','⑤','⑥','⑦','⑧','⑨'][i]}</span><p>${r}</p></div>`).join('\n          ')}
+          </div>
+        </div></div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -576,13 +569,12 @@ ${alts}
 <footer>
   <div class="wrap foot">
     <div>
-      <div class="fbrand display">MUZE</div>
-      <div class="fwave" aria-hidden="true" id="footWave"></div>
-      <p class="lead" style="margin-top:16px;font-size:.95rem">${t.foot.tag}</p>
+      <img class="foot-logo" src="${LOGO}" alt="MUZE" />
+      <p class="lead" style="margin-top:20px;font-size:.95rem">${t.foot.tag}</p>
     </div>
     <div class="foot-links">
       <div class="foot-col"><h6>${t.foot.exploreH}</h6>
-        <a href="#space">${t.nav.space}</a><a href="#layouts">${t.nav.layouts}</a><a href="#gallery">${t.nav.gallery}</a><a href="#pricing">${t.nav.pricing}</a><a href="#rentals">${t.nav.rentals}</a>
+        <a href="#space">${t.nav.space}</a><a href="#layouts">${t.nav.layouts}</a><a href="#gallery">${t.nav.gallery}</a><a href="#info">${t.nav.info}</a>
       </div>
       <div class="foot-col"><h6>${t.foot.visitH}</h6>
         <span>${t.foot.addr1}</span><span>${t.foot.addr2}</span><a href="https://maps.google.com/?q=Sepänkyläntie+2+Vaasa" target="_blank" rel="noopener">${t.foot.maps} →</a>
