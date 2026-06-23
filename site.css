@@ -314,7 +314,6 @@ html[data-mode="day"] .foot-col a,html[data-mode="day"] .foot-col span{color:var
 /* ============ RESPONSIVE ============ */
 @media(max-width:1000px){
   .nav-links{display:none}
-  .nav-tools .lang{display:none}
   .menu-btn{display:flex}
   .duo{min-height:auto}
   .duo .panel{min-height:62vh}
@@ -331,6 +330,12 @@ html[data-mode="day"] .foot-col a,html[data-mode="day"] .foot-col span{color:var
   .rule-grid{grid-template-columns:1fr}
 }
 @media(max-width:600px){
+  .nav-inner{padding:14px var(--pad);gap:10px}
+  .nav-tools{gap:8px}
+  .lang-opt{padding:6px 7px;font-size:.6rem}
+  .toggle{padding:5px}
+  .toggle .lbl-night,.toggle .lbl-day,html[data-mode="day"] .toggle .lbl-day{display:none}
+  .lang-m{display:none}
   .section{padding:clamp(52px,8vh,84px) 0}
   .hero{min-height:90svh;padding-top:110px}
   .hero-logo img{width:min(420px,86vw)}
