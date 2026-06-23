@@ -440,14 +440,10 @@ ${alts}
 </div>
 
 <section class="section" id="space">
-  <div class="wrap intro">
-    <div>
-      <p class="big reveal">${t.intro.big}</p>
-      <p class="lead reveal d1" style="margin-top:26px">${t.intro.body1}</p>
-      <p class="lead reveal d2" style="margin-top:16px">${t.intro.body2}</p>
-    </div>
-    <div class="stats reveal d1">
-      ${t.stats.map(s=>`<div class="stat"><div class="n" data-count="${s.n}">0<small>${s.u}</small></div><div class="l">${s.l}</div></div>`).join('\n      ')}
+  <div class="wrap">
+    <div class="intro-text">
+      <p class="lead reveal">${t.intro.body1}</p>
+      <p class="lead reveal d1" style="margin-top:14px">${t.intro.body2}</p>
     </div>
   </div>
 </section>
@@ -494,10 +490,9 @@ ${alts}
     <div class="shead"><h2 class="display reveal">${t.gal.title}</h2><span class="snum reveal d1">${t.gal.snum}</span></div>
     <div class="gal reveal">
       ${[
-        ['20250517_221241-scaled',0],['4-scaled',1],['20241213_213850-scaled',2],['20250106_141251-scaled',3],
-        ['20250613_194356-scaled',4],['20250909_140627-scaled',5],['20241201_015113-scaled',6],['6-scaled',7],
-        ['20250905_082821-scaled',8],['20240927_183017-scaled',9],['20250412_191204-scaled',10],['10-scaled',11]
-      ].map(([img,ci])=>`<figure><img src="./assets/${img}.webp" alt="${t.gal.caps[ci]}" loading="lazy"><figcaption>${t.gal.caps[ci]}</figcaption></figure>`).join('\n      ')}
+        ['20250517_221241-scaled',0],['4-scaled',1],['20250106_141251-scaled',3],
+        ['20250613_194356-scaled',4],['20241213_213850-scaled',2],['6-scaled',7]
+      ].map(([img,ci])=>`<figure><img src="./assets/${img}.webp" alt="MUZE — ${t.gal.caps[ci]}" loading="lazy"></figure>`).join('\n      ')}
     </div>
   </div>
 </section>
@@ -507,7 +502,7 @@ ${alts}
     <div class="shead"><h2 class="display reveal">${t.info.heading}</h2><span class="snum reveal d1">${t.info.snum}</span></div>
     <div class="acc reveal" id="acc">
 
-      <div class="acc-item open">
+      <div class="acc-item">
         <button class="acc-head">${t.info.fees} <span class="plus">+</span></button>
         <div class="acc-body"><div class="acc-inner">
           <p class="lay-note" style="margin:0 0 26px">${t.price.disclaimer} &nbsp;·&nbsp; ${t.price.spaceNote}</p>
