@@ -399,11 +399,13 @@ ${alts}
       ${navLinks(t)}
     </div>
     <div class="nav-tools">
-      <div class="lang" role="group" aria-label="Language">${langSwitch(lang)}</div>
-      <button class="toggle" id="modeToggle" aria-label="Day / night">
-        <span class="dot"></span>
-        <span class="lbl-night">${t.nav.night}</span><span class="lbl-day">${t.nav.day}</span>
-      </button>
+      <div class="ctrl-group">
+        <div class="lang" role="group" aria-label="Language">${langSwitch(lang)}</div>
+        <button class="toggle" id="modeToggle" aria-label="Day / night">
+          <span class="dot"></span>
+          <span class="lbl-night">${t.nav.night}</span><span class="lbl-day">${t.nav.day}</span>
+        </button>
+      </div>
       <a href="mailto:info@muze.fi" class="btn btn-primary">${t.nav.book} <span class="arrow">→</span></a>
       <button class="menu-btn" id="menuBtn" aria-label="Menu"><span></span><span></span><span></span></button>
     </div>
